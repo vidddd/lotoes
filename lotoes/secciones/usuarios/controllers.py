@@ -17,7 +17,7 @@ from .decorators import admin_required
 from .forms import LoginForm, RegisterForm
 from .models import User
 
-BP_NM = 'user'
+BP_NM = 'usuarios'
 user = Blueprint(BP_NM, __name__)
 
 

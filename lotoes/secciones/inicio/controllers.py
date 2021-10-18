@@ -9,6 +9,7 @@ from flask import (
 
 from ..usuarios.models import Permission
 from config import basedir
+from flask import render_template
 
 BP_NM = 'inicio'
 
@@ -25,8 +26,8 @@ def inject_permissions():
 
 @inicio.route('/')
 def index():
-    return redirect(url_for('inicio.index'))
-    #return render_template('main/index.html')
+    #return redirect(url_for('inicio.index'))
+    return render_template('inicio/index.html')
 
 
 @inicio.route('/favicon.ico')

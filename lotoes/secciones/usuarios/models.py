@@ -68,7 +68,6 @@ class User(UserMixin, BaseModel):
     password_hash = db.Column(db.String(128))
     role_id = db.Column(db.Integer, db.ForeignKey('roles.id'))
     status = db.Column(db.Boolean, default=False)
-    posts = db.relationship('Post', backref='author', lazy='dynamic')
 
     def to_json(self):
         json_data = {

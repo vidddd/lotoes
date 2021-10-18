@@ -2,24 +2,23 @@
 import os
 from lotoes import create_app, db
 from lotoes.secciones.usuarios.models import Role, User
+#from lotoes.secciones.clientes.model_cliente import Cliente
 from flask.ext.script import Manager, Shell
 from flask.ext.migrate import Migrate, MigrateCommand
-print(os.getenv('FLASK_CONFIG'))
+
 app = create_app(os.getenv('FLASK_CONFIG') or 'dev')
+
 manager = Manager(app)
 migrate = Migrate(app, db)
-
 
 def make_shell_context():
     return dict(
         app=app, db=db,
-        User=User, Role=Role
+        User=User, Role=Role, Cliente=Cliente
     )
-
 
 manager.add_command('shell', Shell(make_context=make_shell_context))
 manager.add_command('db', MigrateCommand)
-
 
 @manager.command
 def test():
@@ -35,7 +34,7 @@ def test():
 def init():
     """Enter initial data"""
     db.create_all()
-    Role.insert_roles()
+    # Role.insert_roles()
     #c = Category(name='default')
     db.session.add(c)
     db.session.commit()
@@ -47,8 +46,8 @@ def init():
             name='Admin'
         )
         u.save()
-    if app.debug:
-        Post.generate_fake()
+    #if app.debug:
+        #Post.generate_fake()
 
 
 if __name__ == '__main__':
