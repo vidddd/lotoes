@@ -2,7 +2,7 @@
 Module Docstring
 """
 
-__author__ = "David Alvarez Calvo"
+__author__ = "David Alvarez Calvo david@hipertintorero.com"
 __version__ = "0.1.0"
 __license__ = "MIT"
 
@@ -16,7 +16,5 @@ env = "dev"
 
 app = application.create_app(env)
 
-print(app.url_map)
-
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000, debug=True)
+    app.run(host="0.0.0.0", port=6032, debug=True)

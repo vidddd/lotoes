@@ -1,54 +1,18 @@
 """Manger script."""
 import os
-from lotoes import create_app, db
-from lotoes.secciones.usuarios.models import Role, User
-#from lotoes.secciones.clientes.model_cliente import Cliente
-from flask.ext.script import Manager, Shell
-from flask.ext.migrate import Migrate, MigrateCommand
+from lotoes import db, create_app
+from initial_data import usuarios
+from lotoes.model_usuario import Usuario
 
-app = create_app(os.getenv('FLASK_CONFIG') or 'dev')
+env = os.getenv('FLASK_CONFIG')
+#if env is None or env not in ["test", "prod"]:
+env = "dev"
 
-manager = Manager(app)
-migrate = Migrate(app, db)
-
-def make_shell_context():
-    return dict(
-        app=app, db=db,
-        User=User, Role=Role, Cliente=Cliente
-    )
-
-manager.add_command('shell', Shell(make_context=make_shell_context))
-manager.add_command('db', MigrateCommand)
-
-@manager.command
-def test():
-    """Run the unit tests."""
-    import unittest
-    os.environ["FLASK_CONFIG"] = "test"
-    tests = unittest.TestLoader().discover('tests')
-    unittest.TextTestRunner(verbosity=2).run(tests)
-    os.unlink('data-test.db')
+app = create_app(env)
+app.app_context().push()
 
 
-@manager.command
-def init():
-    """Enter initial data"""
-    db.create_all()
-    # Role.insert_roles()
-    #c = Category(name='default')
-    db.session.add(c)
-    db.session.commit()
-    u = User.query.filter_by(email=app.config['FLASKY_ADMIN']).first()
-    if not u:
-        u = User(
-            email=app.config['FLASKY_ADMIN'],
-            password='testpass',
-            name='Admin'
-        )
-        u.save()
-    #if app.debug:
-        #Post.generate_fake()
+print(usuarios)
 
-
-if __name__ == '__main__':
-    manager.run()
+#db.drop_all()
+#db.create_all()

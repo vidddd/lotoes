@@ -6,11 +6,11 @@ def mount_blueprints(app, config_name):
     
     from lotoes.secciones.inicio import inicio
     from lotoes.secciones.clientes import clientes
-    #from yapper.blueprints.user import user
-    #from yapper.blueprints.blog import blog
+    from lotoes.secciones.usuarios import usuarios
     #from yapper.blueprints.api import api
 
     app.register_blueprint(inicio, url_prefix='')
     app.register_blueprint(clientes, url_prefix='/clientes')
+    app.register_blueprint(usuarios, url_prefix='/usuarios')
     
     '''app.register_blueprint(api, url_prefix='/api/v1')'''

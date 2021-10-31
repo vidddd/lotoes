@@ -1,20 +1,12 @@
-/*
- * -- BASE STYLES --
- * Most of these are inherited from Base, but I want to change a few.
- */
 body {
   color: #333;
+  background-color: #f4f6f9;
 }
 
 a {
   text-decoration: none;
   color: #1b98f8;
 }
-
-/*
- * -- HELPER STYLES --
- * Over-riding some of the .pure-button styles to make my buttons look unique
- */
 .primary-button,
 .secondary-button {
   -webkit-box-shadow: none;
@@ -34,11 +26,6 @@ a {
   padding: 0.5em 2em;
   font-size: 80%;
 }
-
-/*
- * -- LAYOUT STYLES --
- * This layout consists of three main elements, `#nav` (navigation bar), `#list` (email list), and `#main` (email content). All 3 elements are within `#layout`
- */
 #layout,
 #nav,
 #list,
@@ -77,11 +64,6 @@ a {
   display: block;
   padding: 2em 0;
 }
-
-/*
- * -- NAV BAR STYLES --
- * Styling the default .pure-menu to look a little more unique.
- */
 #nav .pure-menu {
   background: transparent;
   border: none;
@@ -100,11 +82,6 @@ a {
   font-size: 110%;
   color: rgb(75, 113, 151);
 }
-
-/*
- * -- EMAIL STYLES --
- * Styles relevant to the email messages, labels, counts, and more.
- */
 .email-count {
   color: rgb(75, 113, 151);
 }
@@ -128,37 +105,6 @@ a {
   background: #40c365;
 }
 
-/* Email Item Styles */
-.email-item {
-  padding: 0.9em 1em;
-  border-bottom: 1px solid #ddd;
-  border-left: 6px solid transparent;
-}
-.email-avatar {
-  border-radius: 3px;
-  margin-right: 0.5em;
-}
-.email-name,
-.email-subject {
-  margin: 0;
-}
-.email-name {
-  text-transform: uppercase;
-  color: #999;
-}
-.email-desc {
-  font-size: 80%;
-  margin: 0.4em 0;
-}
-
-.email-item-selected {
-  background: #eee;
-}
-.email-item-unread {
-  border-left: 6px solid #1b98f8;
-}
-
-/* Email Content Styles */
 .email-content-header,
 .email-content-body,
 .email-content-footer {
@@ -187,13 +133,7 @@ a {
   margin-bottom: 0.3em;
 }
 
-/*
- * -- TABLET (AND UP) MEDIA QUERIES --
- * On tablets and other medium-sized devices, we want to customize some
- * of the mobile styles.
- */
 @media (min-width: 40em) {
-  /* Move the layout over so we can fit the nav + list in on the left */
   #layout {
     padding-left: 170px;
     position: relative;
@@ -244,8 +184,6 @@ a {
 
 /*
  * -- DESKTOP (AND UP) MEDIA QUERIES --
- * On desktops and other large-sized devices, we want to customize some
- * of the mobile styles.
  */
 @media (min-width: 60em) {
   /* This will take up the entire height, and be a little thinner */
@@ -261,5 +199,95 @@ a {
     position: static;
     margin: 0;
     padding: 0;
+  }
+}
+
+.hi-user {
+  color: #999;
+}
+
+#login {
+  background-blend-mode: soft-light;
+  background-color: #fff;
+  margin-top: 15vh;
+  border: 1px solid #1b98f8;
+  padding: 2em;
+}
+
+#login h1,
+input::-webkit-input-placeholder,
+button {
+  font-family: "roboto", sans-serif;
+  transition: all 0.3s ease-in-out;
+}
+
+#login h1 {
+  height: 100px;
+  width: 100%;
+  font-size: 18px;
+  background: darken(#1abc9c, 4%);
+  color: white;
+  line-height: 150%;
+  border-radius: 3px 3px 0 0;
+  box-shadow: 0 2px 5px 1px rgba(0, 0, 0, 0.2);
+}
+
+#login form {
+  box-sizing: border-box;
+  width: 260px;
+  margin: 100px auto 0;
+  box-shadow: 2px 2px 5px 1px rgba(0, 0, 0, 0.2);
+  padding-bottom: 40px;
+  border-radius: 3px;
+  h1 {
+    box-sizing: border-box;
+    padding: 20px;
+  }
+}
+
+#login input {
+  margin: 40px 25px;
+  width: 200px;
+  display: block;
+  border: none;
+  padding: 10px 0;
+  border-bottom: solid 1px #1abc9c;
+  transition: all 0.3s cubic-bezier(0.64, 0.09, 0.08, 1);
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0) 96%,
+    #1abc9c 4%
+  );
+  background-position: -200px 0;
+  background-size: 200px 100%;
+  background-repeat: no-repeat;
+  color: darken(#1abc9c, 20%);
+  &:focus,
+  &:valid {
+    box-shadow: none;
+    outline: none;
+    background-position: 0 0;
+    &::-webkit-input-placeholder {
+      color: #1abc9c;
+      font-size: 11px;
+      transform: translateY(-20px);
+      visibility: visible !important;
+    }
+  }
+}
+
+#login button {
+  border: none;
+  background: #1abc9c;
+  cursor: pointer;
+  border-radius: 3px;
+  padding: 6px;
+  width: 200px;
+  color: white;
+  margin-left: 25px;
+  box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.2);
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 6px 0 rgba(0, 0, 0, 0.2);
   }
 }
