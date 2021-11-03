@@ -1,11 +1,83 @@
-body {
-  color: #333;
-  background-color: #f4f6f9;
+@media screen {
+  @font-face {
+    font-family: "Ubuntu";
+    font-style: normal;
+    font-weight: normal;
+    src: url("../fonts/ubuntu/ubuntu_normal.woff2") format("woff2");
+  }
+}
+:root {
+  --lotoes-blue: #072179;
+  --text: #4e4e4e;
+  --primary-divider: #dedede;
+  --highlight-divider: #979797;
+  --pale-grey: #767676;
+  --divider-dark-bg: #435a85;
+  --error: #ff0000;
+  --bright-blue: #00b5e2;
+  --purple: #7566a0;
+  --orange: #fe5000;
+  --yellow: #fedb00;
+  --green: #279989;
+  --primary: #0079c0;
+  --secondary: #a8cf45;
+  --status-success: #447615;
+  --status-danger: #cc0022;
+  --status-warning: #d48536;
 }
 
-a {
-  text-decoration: none;
-  color: #1b98f8;
+body {
+  color: var(--text);
+  background-color: #f4f6f9;
+  font-family: "Ubuntu", sans-serif;
+}
+.pure-g [class*="pure-u"] {
+  font-family: "Ubuntu", sans-serif;
+}
+
+/*Defaults*/
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+h3 {
+  font-weight: 100;
+}
+table {
+  width: 100%;
+}
+pre {
+  white-space: pre-wrap;
+}
+
+/*Additional*/
+.pull-right {
+  float: right !important;
+}
+
+.subhead {
+  text-transform: uppercase;
+  color: rgb(22, 32, 61);
+  border-bottom: 1px solid #eee;
+  padding: 0.4em 0;
+  font-size: 1.4em;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+}
+.pure-message {
+  padding: 0.2em 1em;
+  margin-bottom: 0.2em;
+  font-size: 85%;
+}
+.header-large h2 {
+  font-weight: 100;
+  color: rgb(176, 202, 219);
 }
 .primary-button,
 .secondary-button {
@@ -26,6 +98,137 @@ a {
   padding: 0.5em 2em;
   font-size: 80%;
 }
+.column-block {
+  margin: 0;
+  padding: 0 1em 2em;
+  background-color: #fff;
+}
+.column-block-header {
+  background: #111;
+  color: #fff;
+  text-align: center;
+}
+.column-block-header h2 {
+  margin: 0;
+  padding-top: 2em;
+  font-size: 1em;
+  font-weight: normal;
+}
+.column-block-info {
+  font-size: 6em;
+  margin: 0.2em 0 0;
+  font-weight: 100;
+}
+.column-block-info span {
+  display: block;
+  text-transform: uppercase;
+  font-size: 0.2em;
+  padding-bottom: 2em;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.5);
+  *color: #fff;
+}
+.column-block-list li {
+  padding: 1em;
+  background: #f7f7f7;
+  border-bottom: 1px solid #e7e7e7;
+}
+/*Button Buble Message Types*/
+.buble-success,
+.buble-error,
+.buble-warning,
+.buble-secondary {
+  padding: 0.5em;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+}
+
+.button-success,
+.message-success,
+.column-success,
+.buble-success,
+.button-error,
+.message-error,
+.column-error,
+.buble-error,
+.button-warning,
+.message-warning,
+.column-warning,
+.buble-warning,
+.button-secondary,
+.message-secondary,
+.column-secondary,
+.buble-secondary {
+  color: white;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+}
+
+.button-success,
+.message-success,
+.column-success,
+.buble-success {
+  background: rgb(28, 184, 65);
+}
+
+.button-error,
+.message-error,
+.column-error,
+.buble-error {
+  background: rgb(202, 60, 60);
+}
+
+.button-warning,
+.message-warning,
+.column-warning,
+.buble-warning {
+  background: rgb(223, 117, 20);
+}
+
+.button-secondary,
+.message-secondary,
+.column-secondary,
+.buble-secondary {
+  background: rgb(66, 184, 221);
+}
+.button-xxsmall {
+  font-size: 40%;
+}
+.button-xsmall {
+  font-size: 70%;
+}
+
+.button-small {
+  font-size: 85%;
+}
+
+.button-large {
+  font-size: 110%;
+}
+
+.button-xlarge {
+  font-size: 125%;
+}
+
+/*Footer*/
+.footer,
+.navigation {
+  margin: 2em 0 0 0;
+  padding: 1em 0;
+  text-align: center;
+}
+.footer {
+  border-top: 1px solid #eee;
+}
+.footer a {
+  color: #aaa;
+  font-size: 80%;
+}
+.footer .pure-menu a:hover,
+.footer .pure-menu a:focus {
+  background: none;
+}
+
 #layout,
 #nav,
 #list,
@@ -34,7 +237,6 @@ a {
   padding: 0;
 }
 
-/* Make the navigation 100% width on phones */
 #nav {
   width: 100%;
   height: 40px;
@@ -50,13 +252,17 @@ a {
   position: absolute;
 }
 
-/* When "Menu" is clicked, the navbar should be 80% height */
 #nav.active {
   height: 80%;
 }
-/* Don't show the navigation items... */
 .nav-inner {
   display: none;
+}
+#nav h1 {
+  color: #fff;
+  font-size: 1.6em;
+  border-bottom: 1px solid #fff;
+  padding-bottom: 10px;
 }
 
 /* ...until the "Menu" button is clicked */
@@ -70,7 +276,8 @@ a {
   text-align: left;
 }
 #nav .pure-menu-link:hover,
-#nav .pure-menu-link:focus {
+#nav .pure-menu-link:focus,
+#nav .pure-menu-link.active {
   background: rgb(55, 60, 90);
 }
 #nav .pure-menu-link {
@@ -105,40 +312,41 @@ a {
   background: #40c365;
 }
 
-.email-content-header,
-.email-content-body,
-.email-content-footer {
+.content-header,
+.content-body,
+.content-footer {
   padding: 1em 2em;
 }
-.email-content-header {
+.content-header {
   border-bottom: 1px solid #ddd;
 }
 
-.email-content-title {
+.content-title {
   margin: 0.5em 0 0;
 }
-.email-content-subtitle {
+.content-subtitle {
   font-size: 1em;
   margin: 0;
   font-weight: normal;
 }
-.email-content-subtitle span {
+.content-subtitle span {
   color: #999;
 }
-.email-content-controls {
+.content-controls {
   margin-top: 2em;
   text-align: right;
 }
-.email-content-controls .secondary-button {
+.content-controls .secondary-button {
   margin-bottom: 0.3em;
 }
 
 @media (min-width: 40em) {
   #layout {
-    padding-left: 170px;
+    padding-left: 185px;
     position: relative;
+    top: 33%;
+    margin-right: 2%;
   }
-
   /* These are position:fixed; elements that will be in the left 500px of the screen */
   #nav,
   #list {
@@ -148,7 +356,7 @@ a {
     overflow: auto;
   }
   #nav {
-    margin-left: -170px; /* "left col (nav + list)" width */
+    margin-left: -185px;
     width: 170px;
     height: 100%;
   }
@@ -156,7 +364,7 @@ a {
   /* Show the menu items on the larger screen */
   .nav-inner {
     display: block;
-    padding: 2em 0;
+    padding: 0.2em 0;
   }
 
   /* Hide the "Menu" button on larger screens */
@@ -169,16 +377,6 @@ a {
     width: 100%;
     height: 33%;
     border-bottom: 1px solid #ddd;
-  }
-
-  #main {
-    position: fixed;
-    top: 33%;
-    right: 0;
-    bottom: 0;
-    left: 150px;
-    overflow: auto;
-    width: auto; /* so that it's not 100% */
   }
 }
 
@@ -203,91 +401,67 @@ a {
 }
 
 .hi-user {
-  color: #999;
+  margin-top: 10px;
+  color: rgb(221, 202, 202);
 }
-
+/*** LOGIN ***/
+.body-login {
+  background-color: rgba(0, 37, 73, 0.5);
+}
 #login {
-  background-blend-mode: soft-light;
-  background-color: #fff;
-  margin-top: 15vh;
-  border: 1px solid #1b98f8;
-  padding: 2em;
+  margin-top: 19vh;
+  background-color: #ffffff;
+  border-radius: 1.5em;
+  box-shadow: 0px 11px 35px 2px rgba(0, 0, 0, 0.14);
+  padding: 20px;
+  text-align: center;
 }
-
-#login h1,
-input::-webkit-input-placeholder,
-button {
-  font-family: "roboto", sans-serif;
-  transition: all 0.3s ease-in-out;
+#login .form-item {
+  margin: 20px 0;
 }
-
 #login h1 {
-  height: 100px;
-  width: 100%;
-  font-size: 18px;
-  background: darken(#1abc9c, 4%);
-  color: white;
-  line-height: 150%;
-  border-radius: 3px 3px 0 0;
-  box-shadow: 0 2px 5px 1px rgba(0, 0, 0, 0.2);
+  padding-top: 40px;
+  color: #133e66;
+  font-family: "Ubuntu", sans-serif;
+  font-weight: bold;
+  font-size: 23px;
 }
-
-#login form {
+#login .form-item input {
+  width: 66%;
+  color: rgb(38, 50, 56);
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 1px;
+  background: rgba(136, 126, 126, 0.04);
+  padding: 10px 20px;
+  border: none;
+  border-radius: 20px;
+  outline: none;
   box-sizing: border-box;
-  width: 260px;
-  margin: 100px auto 0;
-  box-shadow: 2px 2px 5px 1px rgba(0, 0, 0, 0.2);
-  padding-bottom: 40px;
-  border-radius: 3px;
-  h1 {
-    box-sizing: border-box;
-    padding: 20px;
-  }
+  border: 2px solid rgba(0, 0, 0, 0.02);
+  margin-bottom: 30px;
+  text-align: center;
+  margin-bottom: 27px;
+  font-family: "Ubuntu", sans-serif;
 }
-
-#login input {
-  margin: 40px 25px;
-  width: 200px;
-  display: block;
-  border: none;
-  padding: 10px 0;
-  border-bottom: solid 1px #1abc9c;
-  transition: all 0.3s cubic-bezier(0.64, 0.09, 0.08, 1);
-  background: linear-gradient(
-    to bottom,
-    rgba(255, 255, 255, 0) 96%,
-    #1abc9c 4%
-  );
-  background-position: -200px 0;
-  background-size: 200px 100%;
-  background-repeat: no-repeat;
-  color: darken(#1abc9c, 20%);
-  &:focus,
-  &:valid {
-    box-shadow: none;
-    outline: none;
-    background-position: 0 0;
-    &::-webkit-input-placeholder {
-      color: #1abc9c;
-      font-size: 11px;
-      transform: translateY(-20px);
-      visibility: visible !important;
-    }
-  }
+#login .in:focus,
+#focus .in:focus {
+  border: 2px solid rgba(0, 0, 0, 0.18) !important;
 }
-
-#login button {
-  border: none;
-  background: #1abc9c;
+#login #submit {
   cursor: pointer;
-  border-radius: 3px;
-  padding: 6px;
-  width: 200px;
-  color: white;
-  margin-left: 25px;
-  box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.2);
-  &:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 6px 6px 0 rgba(0, 0, 0, 0.2);
-  }
+  border-radius: 5em;
+  color: #fff;
+  background: linear-gradient(to right, #11187a, #4a73e4);
+  border: 0;
+  font-family: "Ubuntu", sans-serif;
+  font-size: 14px;
+  box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.1);
+}
+
+/*** ALERT ***/
+.alert {
+  width: 100%;
+  font-size: 13px;
+  border: 1px solid red;
 }

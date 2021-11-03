@@ -14,28 +14,15 @@ usuarios = Blueprint(BP_NM, __name__, template_folder='templates')
 @login_required
 def usuarios_func():
     usuarios = Usuario.get_all()
-    return render_template('usuarios.html', usuarios=usuarios)
+    return render_template('usuarios.html', usuarios=usuarios, seccion="usuarios")
 
 @usuarios.route('/login', methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:
-        return redirect(url_for('index'))
+        return redirect(url_for('inicio'))
     form = LoginForm()
-    '''print(form.errors)
-
-    if form.is_submitted():
-        print ('submitted')
-
-    if form.validate():
-        print ('validators')
-
-    print(form.errors)
-
-    if form.validate():
-        print ("valid")
-    '''
     if form.validate_on_submit():
-        usuario = Usuario.query.filter_by(email=form.email.data).first()
+        usuario = Usuario.get_by_email(form.email.data)
         if usuario is not None and usuario.check_password(form.password.data):
             login_user(usuario, remember=form.remember_me.data)
             next_page = request.args.get('next')
@@ -43,7 +30,7 @@ def login():
                 next_page = url_for('inicio.inicio_func')
             return redirect(next_page)
         
-    return render_template('login.html', form=form)
+    return render_template('login.html', form=form, seccion="usuarios")
 
 @usuarios.route('/logout')
 @login_required
@@ -54,4 +41,4 @@ def logout():
 @usuarios.route('/usuarios/&lt;username&gt;')
 @login_required
 def user(username):
-    return render_template('clientes.html', cliente=cliente)
+    return render_template('clientes.html', cliente=cliente, seccion="usuarios")

@@ -9,7 +9,7 @@ inicio = Blueprint(BP_NM, __name__, template_folder='templates')
 @inicio.route('/')
 @login_required
 def inicio_func():
-    return render_template('inicio.html')
+    return render_template('inicio.html', seccion="inicio")
 
 @inicio.errorhandler(404)
 def page_not_found(e):

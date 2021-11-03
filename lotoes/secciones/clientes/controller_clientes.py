@@ -13,7 +13,7 @@ clientes = Blueprint(BP_NM, __name__, template_folder='templates')
 @login_required
 def clientes_func():
     clientes = Cliente.get_all()
-    return render_template('clientes.html', clientes=clientes)
+    return render_template('clientes.html', clientes=clientes, seccion='clientes')
 
 @clientes.route('/form', methods=['GET', 'POST'], defaults={'cliente_id': None})
 @clientes.route('/form/<int:cliente_id>', methods=['GET', 'POST'])
@@ -21,13 +21,27 @@ def clientes_func():
 def clientes_form(cliente_id=None):
     form = ClienteForm()
     if form.validate_on_submit():
-        print('clientes form')
+        ##cliente = form.to_dict(flat=False)
         nombre = form.nombre.data
+        tipo_cliente = form.tipo_cliente.data
         es_empresa = form.es_empresa.data
-        print(nombre)
-    return render_template('form_cliente.html', form=form)
+        persona_contacto = form.persona_contacto.data
+        nif = form.nif.data
+        telefono = form.telefono.data
+        movil = form.movil.data
+        email = form.email.data
+        direccion = form.direccion.data
+        municipio = form.municipio.data
+        provincia = form.provincia.data
+        cp = form.cp.data
+        pais = form.pais.data
+        notas = form.notas.data
+        cliente = Cliente(nombre=nombre, tipo_cliente=tipo_cliente, es_empresa=es_empresa, persona_contacto=persona_contacto, nif=nif, telefono=telefono, movil=movil, email=email, direccion=direccion, municipio=municipio, provincia=provincia, cp=cp, pais=pais, notas=notas )
+        cliente.save()
+        return redirect(url_for('/clientes'))
+    return render_template('form_cliente.html', form=form, seccion='clientes')
 
 @clientes.route('/cliente/<int:id>')
 @login_required
 def cliente(id):
-    return render_template('cliente.html', id=escape(id))
+    return render_template('cliente.html', id=escape(id),seccion='clientes')
