@@ -38,6 +38,17 @@ def logout():
     logout_user()
     return redirect(url_for('usuarios.login'))
 
+@usuarios.route('/form', methods=['GET', 'POST'], defaults={'usuario_id': None})
+@usuarios.route('/form/<int:usuario_id>', methods=['GET', 'POST'])
+@login_required
+def usuarios_form(usuario_id=None):
+    form = UsuarioForm()
+    if form.validate_on_submit():
+        usuario = Usuario(name=form.name.data, email=form.email.data, password=form.password.data, is_admin=form.is_admin.data)
+        usuario.save()
+        return redirect(url_for('usuarios'))
+    return render_template('form_usuario.html', form=form, seccion='usuarios')
+
 @usuarios.route('/usuarios/&lt;username&gt;')
 @login_required
 def user(username):

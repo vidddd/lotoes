@@ -21,12 +21,12 @@ def clientes_func():
 def clientes_form(cliente_id=None):
     form = ClienteForm()
     if form.validate_on_submit():
-        ##cliente = form.to_dict(flat=False)
         nombre = form.nombre.data
         tipo_cliente = form.tipo_cliente.data
         es_empresa = form.es_empresa.data
         persona_contacto = form.persona_contacto.data
-        nif = form.nif.data
+        tipo_documento = form.tipo_documento.data
+        documento = form.documento.data
         telefono = form.telefono.data
         movil = form.movil.data
         email = form.email.data
@@ -35,10 +35,12 @@ def clientes_form(cliente_id=None):
         provincia = form.provincia.data
         cp = form.cp.data
         pais = form.pais.data
+        tiene_credito = form.tiene_credito.data
+        credito = form.credito.data
         notas = form.notas.data
-        cliente = Cliente(nombre=nombre, tipo_cliente=tipo_cliente, es_empresa=es_empresa, persona_contacto=persona_contacto, nif=nif, telefono=telefono, movil=movil, email=email, direccion=direccion, municipio=municipio, provincia=provincia, cp=cp, pais=pais, notas=notas )
+        cliente = Cliente(nombre=nombre, tipo_cliente=tipo_cliente, es_empresa=es_empresa, persona_contacto=persona_contacto, tipo_documento=tipo_documento, documento=documento, telefono=telefono, movil=movil, email=email, direccion=direccion, municipio=municipio, provincia=provincia, cp=cp, pais=pais, tiene_credito=tiene_credito, credito=credito, notas=notas )
         cliente.save()
-        return redirect(url_for('/clientes'))
+        return redirect(url_for('clientes'))
     return render_template('form_cliente.html', form=form, seccion='clientes')
 
 @clientes.route('/cliente/<int:id>')

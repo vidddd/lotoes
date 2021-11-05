@@ -1,5 +1,6 @@
 from flask_login import UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
+from sqlalchemy.exc import IntegrityError
 
 from lotoes import db
 from lotoes import login_manager
@@ -30,7 +31,14 @@ class Usuario(db.Model, UserMixin):
     def save(self):
         if not self.id:
             db.session.add(self)
-        db.session.commit()
+        saved = False
+        count = 0
+        while not saved:
+            try:
+                db.session.commit()
+                saved = True
+            except IntegrityError:
+                count += 1
 
     def delete(self):
         db.session.delete(self)
