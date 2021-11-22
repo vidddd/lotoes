@@ -12,7 +12,7 @@ usuarios = Blueprint(BP_NM, __name__, template_folder='templates')
 
 @usuarios.route('/')
 @login_required
-def usuarios_func():
+def usuarios_index():
     usuarios = Usuario.get_all()
     return render_template('usuarios.html', usuarios=usuarios, seccion="usuarios")
 
@@ -46,10 +46,11 @@ def usuarios_form(usuario_id=None):
     if form.validate_on_submit():
         usuario = Usuario(name=form.name.data, email=form.email.data, password=form.password.data, is_admin=form.is_admin.data)
         usuario.save()
-        return redirect(url_for('usuarios'))
+        return redirect(url_for('usuarios.usuarios_index'))
     return render_template('form_usuario.html', form=form, seccion='usuarios')
 
-@usuarios.route('/usuarios/&lt;username&gt;')
+@usuarios.route('/usuario/<int:usuario_id>')
 @login_required
-def user(username):
-    return render_template('clientes.html', cliente=cliente, seccion="usuarios")
+def usuario(usuario_id):
+    usuario = Usuario.get_by_id(usuario_id)
+    return render_template('usuario.html', usuario=usuario, seccion='usuarios')

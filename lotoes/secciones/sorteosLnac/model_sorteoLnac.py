@@ -7,11 +7,19 @@ class SorteoLnac(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     #user_id = db.Column(db.Integer, db.ForeignKey('blog_user.id', ondelete='CASCADE'), nullable=False)
     nombre = db.Column(db.String(256), nullable=False)
-    codigo = db.Column(db.Integer, nullable=False)
-    tipo = db.Column(db.Integer, nullable=False)
-    ano = db.Column(db.Integer, nullable=False)
-
-
+    numero_sorteo = db.Column(db.Integer, nullable=False)
+    ano_sorteo = db.Column(db.Integer, nullable=False)
+    tipo_sorteo = db.Column(db.Integer, nullable=False)
+    fecha_sorteo = db.Column(db.DateTime())
+    fecha_caducidad = db.Column(db.DateTime())
+    fracciones_consignadas = db.Column(db.Integer)
+    fracciones_devueltas = db.Column(db.Integer)
+    estado_consignacion = db.Column(db.Integer)
+    porcentaje_paga_premios = db.Column(db.Integer)
+    precio_billete = db.Column(db.Float)
+    numero_series = db.Column(db.Integer)
+    numero_billetes = db.Column(db.Integer)
+    
     def __repr__(self):
         return f'<SorteoLnac {self.nombre}>'
 
@@ -29,3 +37,7 @@ class SorteoLnac(db.Model):
     @staticmethod
     def get_all():
         return SorteoLnac.query.all()
+    
+    @staticmethod
+    def get_by_id(id):
+        return SorteoLnac.query.get(id)

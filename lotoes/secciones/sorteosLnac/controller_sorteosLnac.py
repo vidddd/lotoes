@@ -15,7 +15,8 @@ def sorteosLnac_func():
     sorteosLnac = SorteoLnac.get_all()
     return render_template('sorteosLnac.html', sorteosLnac=sorteosLnac, seccion="sorteos")
 
-@sorteosLnac.route('/sorteoLnac/&lt;id&gt;')
+@sorteosLnac.route('/sorteoLnac/<int:sorteo_id>')
 @login_required
-def user(username):
-    return render_template('clientes.html', cliente=cliente, seccion="sorteos")
+def sorteoLnac(sorteo_id):
+    sorteo = SorteoLnac.get_by_id(sorteo_id)
+    return render_template('sorteoLnac.html', sorteo=sorteo, seccion="sorteos")

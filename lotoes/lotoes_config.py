@@ -20,3 +20,10 @@ tipo_cliente = [
     (9, "Colegio"), 
     (10, "Administracion Loteria")
 ]
+
+clasificacion_interna = [
+    (0, "-- Seleccione --"),
+    (1, "Normal"),
+    (2, "Moroso"),
+    (3, "Tarjeta")
+]

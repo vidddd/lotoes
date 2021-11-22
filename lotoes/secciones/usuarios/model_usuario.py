@@ -38,6 +38,7 @@ class Usuario(db.Model, UserMixin):
                 db.session.commit()
                 saved = True
             except IntegrityError:
+                print(IntegrityError)
                 count += 1
 
     def delete(self):
