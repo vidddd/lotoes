@@ -5,7 +5,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 from config import config
 from .blueprints import mount_blueprints
-from .extensions import register_error_handlers
+from .extensions import register_error_handlers, configure_logging
 
 db = SQLAlchemy()
 
@@ -33,5 +33,6 @@ def create_app(config_name, set_utf=True):
     mount_blueprints(app, config_name)
 
     register_error_handlers(app)
+    configure_logging(app)
 
     return app

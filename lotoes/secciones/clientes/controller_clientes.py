@@ -4,6 +4,7 @@ from markupsafe import escape
 from .forms_clientes import ClienteForm
 from .model_cliente import Cliente
 from flask_login import login_required
+from werkzeug.exceptions import NotFound
 
 BP_NM = 'clientes'
 
@@ -55,4 +56,6 @@ def cliente_form(cliente_id=None):
 @login_required
 def cliente(cliente_id):
     cliente = Cliente.get_by_id(cliente_id)
+    if cliente is None:
+        raise NotFound(cliente_id)
     return render_template('cliente.html', cliente=cliente, seccion='clientes')

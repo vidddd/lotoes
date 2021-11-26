@@ -1,9 +1,10 @@
 
-from flask import url_for, redirect, Blueprint, render_template, request
+from flask import url_for, redirect, Blueprint, render_template, request, current_app
 from .model_usuario import Usuario
 from .forms import UsuarioForm, LoginForm
 from werkzeug.urls import url_parse
 from flask_login import login_required, login_user, logout_user, current_user
+from werkzeug.exceptions import NotFound
 
 BP_NM = 'usuarios'
 
@@ -13,6 +14,7 @@ usuarios = Blueprint(BP_NM, __name__, template_folder='templates')
 @usuarios.route('/')
 @login_required
 def usuarios_index():
+    current_app.logger.info('Mostrando los usuaruis del blog')
     usuarios = Usuario.get_all()
     return render_template('usuarios.html', usuarios=usuarios, seccion="usuarios")
 
@@ -39,7 +41,6 @@ def logout():
     return redirect(url_for('usuarios.login'))
 
 @usuarios.route('/form', methods=['GET', 'POST'], defaults={'usuario_id': None})
-@usuarios.route('/form/<int:usuario_id>', methods=['GET', 'POST'])
 @login_required
 def usuarios_form(usuario_id=None):
     form = UsuarioForm()
@@ -49,8 +50,32 @@ def usuarios_form(usuario_id=None):
         return redirect(url_for('usuarios.usuarios_index'))
     return render_template('form_usuario.html', form=form, seccion='usuarios')
 
+@usuarios.route('/<int:usuario_id>/edit', methods=['GET', 'POST'])
+@login_required
+def usuario_edit(usuario_id=None):
+    usuario = Usuario.get_by_id(usuario_id)
+    if usuario is None:
+        raise NotFound(usuario_id)
+    form = UsuarioForm()
+    if form.validate_on_submit():
+        usuario.name = form.name.data
+        usuario.password = form.password.data
+        usuario.email = form.email.data
+        usuario.es_admin = form.es_admin.data
+        usuario.save()
+        return redirect(url_for('usuarios.usuarios_index'))
+    
+    form.name.data = usuario.name
+    form.password.data = usuario.password
+    form.email.data = usuario.email
+    form.is_admin = form.is_admin
+    
+    return render_template('form_usuario.html', form=form, seccion='usuarios')
+
 @usuarios.route('/usuario/<int:usuario_id>')
 @login_required
 def usuario(usuario_id):
     usuario = Usuario.get_by_id(usuario_id)
+    if usuario is None:
+        raise NotFound(usuario_id)
     return render_template('usuario.html', usuario=usuario, seccion='usuarios')

@@ -8,7 +8,7 @@
 }
 :root {
   --lotoes-blue: #072179;
-  --text: #4e4e4e;
+  --text: #424242;
   --primary-divider: #dedede;
   --highlight-divider: #979797;
   --pale-grey: #767676;
@@ -19,8 +19,8 @@
   --orange: #fe5000;
   --yellow: #fedb00;
   --green: #279989;
-  --primary: #0079c0;
-  --secondary: #a8cf45;
+  --primary-nav: #121335;
+  --secondary-nav: #46485c;
   --status-success: #447615;
   --status-danger: #cc0022;
   --status-warning: #d48536;
@@ -30,12 +30,12 @@ body {
   color: var(--text);
   background-color: #f4f6f9;
   font-family: "Ubuntu", sans-serif;
+  text-align: left;
+  line-height: 1.5;
 }
 .pure-g [class*="pure-u"] {
   font-family: "Ubuntu", sans-serif;
 }
-
-/*Defaults*/
 * {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -55,29 +55,22 @@ table {
 pre {
   white-space: pre-wrap;
 }
-
-/*Additional*/
 .pull-right {
   float: right !important;
 }
-
-.subhead {
-  text-transform: uppercase;
-  color: rgb(22, 32, 61);
-  border-bottom: 1px solid #eee;
-  padding: 0.4em 0;
-  font-size: 1.4em;
-  font-weight: 500;
-  letter-spacing: 0.1em;
+#header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 60px;
+  background-color: #fff;
+  overflow: hidden;
+  border-bottom: 1px solid #133e66;
 }
 .pure-message {
   padding: 0.2em 1em;
   margin-bottom: 0.2em;
   font-size: 85%;
-}
-.header-large h2 {
-  font-weight: 100;
-  color: rgb(176, 202, 219);
 }
 .primary-button,
 .secondary-button {
@@ -211,21 +204,21 @@ pre {
 }
 
 /*Footer*/
-.footer,
+#footer,
 .navigation {
   margin: 2em 0 0 0;
   padding: 1em 0;
   text-align: center;
 }
-.footer {
+#footer {
   border-top: 1px solid #eee;
 }
-.footer a {
+#footer a {
   color: #aaa;
   font-size: 80%;
 }
-.footer .pure-menu a:hover,
-.footer .pure-menu a:focus {
+#footer .pure-menu a:hover,
+#footer .pure-menu a:focus {
   background: none;
 }
 
@@ -241,7 +234,7 @@ pre {
   width: 100%;
   height: 40px;
   position: relative;
-  background: rgb(37, 42, 58);
+  background: var(--primary-nav);
   text-align: center;
 }
 /* Show the "Menu" button on phones */
@@ -261,7 +254,6 @@ pre {
 #nav h1 {
   color: #fff;
   font-size: 1.6em;
-  border-bottom: 1px solid #fff;
   padding-bottom: 10px;
 }
 
@@ -278,19 +270,11 @@ pre {
 #nav .pure-menu-link:hover,
 #nav .pure-menu-link:focus,
 #nav .pure-menu-link.active {
-  background: rgb(55, 60, 90);
+  background: var(--secondary-nav);
 }
 #nav .pure-menu-link {
   color: #fff;
   margin-left: 0.5em;
-}
-#nav .pure-menu-heading {
-  border-bottom: none;
-  font-size: 110%;
-  color: rgb(75, 113, 151);
-}
-.email-count {
-  color: rgb(75, 113, 151);
 }
 
 .email-label-personal,
@@ -394,9 +378,8 @@ pre {
 
   /* This will now take up it's own column, so don't need position: fixed; */
   #main {
-    position: static;
     margin: 0;
-    padding: 0;
+    padding: 60px 0 0 0;
   }
 }
 

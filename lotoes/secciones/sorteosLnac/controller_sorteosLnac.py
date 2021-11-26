@@ -1,8 +1,8 @@
 
 from flask import url_for, redirect, Blueprint, render_template, request
 from .model_sorteoLnac import SorteoLnac
-#from .forms import UsuarioForm
 from flask_login import login_required, login_user, logout_user, current_user
+from werkzeug.exceptions import NotFound
 
 BP_NM = 'sorteosLnac'
 
@@ -19,4 +19,6 @@ def sorteosLnac_func():
 @login_required
 def sorteoLnac(sorteo_id):
     sorteo = SorteoLnac.get_by_id(sorteo_id)
+    if sorteo is None:
+        raise NotFound(sorteo_id)
     return render_template('sorteoLnac.html', sorteo=sorteo, seccion="sorteos")

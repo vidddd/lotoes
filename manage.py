@@ -34,20 +34,23 @@ for sorteos in sorteosLnac:
 with open('data/Clientes.csv', 'r') as read_obj:
         csv = reader(read_obj)
         for row in csv:
+            if isinstance(row[20], int):
+                print(cp)
+                cp=int(row[20]) 
             cliente = Cliente(
                           nombre=row[1],
                           tipo_cliente=1,
                           clasificacion_interna=1,
-                          persona_contacto=row[20],
+                          persona_contacto=row[25],
                           tipo_documento=1,
                           documento=row[8],
                           telefono=row[14],
                           #movil=int(row[15])
-                          #email=row[11],
-                          #direccion=row[12],
-                          #municipio=row[13],
+                          email=row[16],
+                          direccion=row[17],
+                          municipio=row[18],
                           #provincia=row[14],
-                          #cp=row[15],
+                          #cp=cp,
                           #notas=row[16] 
                         ) 
             obj_list.append(cliente)
