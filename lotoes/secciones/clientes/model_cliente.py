@@ -58,6 +58,11 @@ class Cliente(db.Model):
     def delete(self):
         db.session.delete(self)
         db.session.commit()
+        
+    @staticmethod
+    def all_paginated(page=1, per_page=20):
+        return Cliente.query.order_by(Cliente.creado.asc()).\
+            paginate(page=page, per_page=per_page, error_out=False)
     
 class Provincia(db.Model):
     __tablename__ = 'provincias'

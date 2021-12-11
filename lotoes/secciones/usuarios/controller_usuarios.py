@@ -61,7 +61,7 @@ def usuario_edit(usuario_id=None):
         usuario.name = form.name.data
         usuario.password = form.password.data
         usuario.email = form.email.data
-        usuario.es_admin = form.es_admin.data
+        usuario.is_admin = form.is_admin.data
         usuario.save()
         return redirect(url_for('usuarios.usuarios_index'))
     

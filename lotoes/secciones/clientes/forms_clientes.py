@@ -31,3 +31,4 @@ class ClienteForm(FlaskForm):
     fecha_nacimiento = DateField('Fecha Nacimiento')
     notas = TextAreaField('Notas')
     submit = SubmitField('Guardar')
+    

@@ -1,6 +1,6 @@
 
-from flask import url_for, redirect, Blueprint, render_template
-from markupsafe import escape
+from flask import url_for, redirect, Blueprint, render_template, request, current_app
+#from markupsafe import escape
 from .forms_clientes import ClienteForm
 from .model_cliente import Cliente
 from flask_login import login_required
@@ -13,7 +13,8 @@ clientes = Blueprint(BP_NM, __name__, template_folder='templates')
 @clientes.route('/')
 @login_required
 def clientes_index():
-    clientes = Cliente.get_all()
+    page = int(request.args.get('page', 1))
+    clientes = Cliente.all_paginated(page, current_app.config['ITEMS_PER_PAGE'])
     return render_template('clientes.html', clientes=clientes, seccion='clientes')
 
 @clientes.route('/form', methods=['GET', 'POST'], defaults={'cliente_id': None})

@@ -2,10 +2,11 @@
 import os
 from csv import reader
 from lotoes import db, create_app
-from initial_data import usuarios, provincias, sorteosLnac
+from initial_data import usuarios, provincias, sorteosLnac, administraciones
 from lotoes.secciones.usuarios.model_usuario import Usuario
 from lotoes.secciones.clientes.model_cliente import Provincia, Cliente
 from lotoes.secciones.sorteosLnac.model_sorteoLnac import SorteoLnac
+from lotoes.secciones.administraciones.model_administracion import Administracion
 
 env = os.getenv('FLASK_CONFIG')
 #if env is None or env not in ["test", "prod"]:
@@ -31,11 +32,15 @@ for sorteos in sorteosLnac:
     data_obj= SorteoLnac(**sorteos)
     obj_list.append(data_obj)
     
+for administracion in administraciones:
+    data_obj= Administracion(**administracion)
+    obj_list.append(data_obj)
+    
+    
 with open('data/Clientes.csv', 'r') as read_obj:
         csv = reader(read_obj)
         for row in csv:
             if isinstance(row[20], int):
-                print(cp)
                 cp=int(row[20]) 
             cliente = Cliente(
                           nombre=row[1],
