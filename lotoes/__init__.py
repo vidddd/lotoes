@@ -13,7 +13,6 @@ login_manager = LoginManager()
 
 login_manager.session_protection = 'strong'
 login_manager.login_view = 'usuarios.login'
-#login_manager.login_message_category = 'info'
 
 def setdefaultencoding():
     if sys.version[0] == '2':

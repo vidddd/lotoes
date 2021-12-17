@@ -17,6 +17,7 @@ class Administracion(db.Model):
     cp = db.Column(db.Integer, nullable=False)
     notas = db.Column(db.Text)
     provincia_id = db.Column(db.SmallInteger, db.ForeignKey('provincias.id', ondelete='CASCADE'))
+    provincia = db.relationship('Provincia',backref=db.backref('provincias', lazy=True))
 
     def __repr__(self):
         return f'<Administracion {self.nombre}>'

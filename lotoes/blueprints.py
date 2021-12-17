@@ -9,6 +9,7 @@ def mount_blueprints(app, config_name):
     from lotoes.secciones.usuarios import usuarios
     from lotoes.secciones.sorteosLnac import sorteosLnac
     from lotoes.secciones.administraciones import administraciones
+    from lotoes.secciones.consignaciones import consignaciones
     from lotoes.secciones.api import api
     
 
@@ -17,4 +18,5 @@ def mount_blueprints(app, config_name):
     app.register_blueprint(usuarios, url_prefix='/usuarios')
     app.register_blueprint(sorteosLnac, url_prefix='/sorteosLnac')
     app.register_blueprint(administraciones, url_prefix='/administraciones')
+    app.register_blueprint(consignaciones, url_prefix='/consignaciones')
     app.register_blueprint(api, url_prefix='/api/v1')

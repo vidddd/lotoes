@@ -1,9 +1,7 @@
-
 from flask import url_for, redirect, Blueprint, render_template, request, current_app
 from .model_administracion import Administracion
 from .form_administracion import AdministracionForm
 from flask_login import login_required, login_user, logout_user, current_user
-from .model_administracion import Administracion
 from werkzeug.exceptions import NotFound
 
 BP_NM = 'administraciones'
@@ -31,6 +29,8 @@ def administraciones_form(usuario_id=None):
             web=form.web.data,
             direccion=form.direccion.data,
             municipio=form.municipio.data,
+            cp=form.cp.data,
+            provincia_id=form.provincias.data.id,
             notas=form.notas.data)
         administracion.save()
         return redirect(url_for('administraciones.administraciones_index'))
@@ -40,7 +40,6 @@ def administraciones_form(usuario_id=None):
 @login_required
 def administracion(administracion_id):
     administracion = Administracion.get_by_id(administracion_id)
-    #raise NotFound(administracion_id)
     if administracion is None:
         raise NotFound(administracion_id)
     return render_template('administracion.html', administracion=administracion, seccion='administraciones')
@@ -48,22 +47,38 @@ def administracion(administracion_id):
 
 @administraciones.route('/<int:administracion_id>/edit', methods=['GET', 'POST'])
 @login_required
-def administraciones_edit(_id=None):
-    usuario = Usuario.get_by_id(usuario_id)
-    if usuario is None:
-        raise NotFound(usuario_id)
-    form = UsuarioForm()
+def administracion_edit(administracion_id=None):
+    administracion = Administracion.get_by_id(administracion_id)
+    if administracion is None:
+        raise NotFound(administracion_id)
+    form = AdministracionForm()
     if form.validate_on_submit():
-        usuario.name = form.name.data
-        usuario.password = form.password.data
-        usuario.email = form.email.data
-        usuario.is_admin = form.is_admin.data
-        usuario.save()
+        administracion.nombre=form.nombre.data, 
+        administracion.contacto=form.contacto.data, 
+        administracion.codigoSelae=form.codigoSelae.data, 
+        administracion.telefono=form.telefono.data,
+        administracion.movil=form.movil.data,
+        administracion.email=form.email.data,
+        administracion.web=form.web.data,
+        administracion.direccion=form.direccion.data,
+        administracion.municipio=form.municipio.data,
+        administracion.cp=form.cp.data,
+        administracion.provincia_id=form.provincias.data.id,
+        administracion.notas=form.notas.data
+        administracion.save()
         return redirect(url_for('administraciones.administraciones_index'))
     
-    form.name.data = usuario.name
-    form.password.data = usuario.password
-    form.email.data = usuario.email
-    form.is_admin = form.is_admin
+    form.nombre.data=administracion.nombre, 
+    form.contacto.data=administracion.contacto, 
+    form.codigoSelae.data=administracion.codigoSelae, 
+    form.telefono.data=administracion.telefono,
+    form.movil.data=administracion.movil,
+    form.email.data=administracion.email,
+    form.web.data=administracion.web,
+    form.direccion.data=administracion.direccion,
+    form.municipio.data=administracion.municipio,
+    form.cp.data=administracion.cp,
+    #form.provincias.data.id=administracion.provincia_id,
+    form.notas.data=administracion.notas
     
-    return render_template('form_usuario.html', form=form, seccion='administraciones')
+    return render_template('form_administracion.html', form=form, seccion='administraciones')
