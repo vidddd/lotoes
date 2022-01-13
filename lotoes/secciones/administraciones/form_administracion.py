@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import IntegerField, FloatField, StringField, SubmitField, TextField, BooleanField, SelectField, TextAreaField
+from wtforms import IntegerField, StringField, SubmitField, TextField, BooleanField, SelectField, TextAreaField
 from wtforms.validators import DataRequired, Email, Length
 from lotoes.secciones.clientes.model_cliente import Provincia, getProvincia
 from wtforms.ext.sqlalchemy.fields import QuerySelectField
@@ -13,11 +13,14 @@ class AdministracionForm(FlaskForm):
     codigoSelae = IntegerField()
     telefono = StringField('Teléfono', validators=[Length(max=15)])
     movil = StringField('Movil', validators=[Length(max=15)])
-    email = StringField('Email', validators=[Length(max=100)])
+    email = StringField('Email', validators=[Length(max=100), Email()])
     web = StringField('Web', validators=[Length(max=100)])
     direccion = StringField('Direccion', validators=[Length(max=256)])
     municipio = StringField('Municipio', validators=[Length(max=2556)])
-    cp = IntegerField('Codigo Postal', validators=[DataRequired()])
+    cp = IntegerField('Codigo Postal', validators=[
+                     #Length(min=5, max=5, message='Name length must be between %(min)d and %(max)dcharacters')
+                     ])
+
     provincias = QuerySelectField(query_factory=provincias_all, allow_blank=True, get_label='nombre', validators=[DataRequired()])
     notas = TextAreaField('Notas')
     submit = SubmitField('Guardar')

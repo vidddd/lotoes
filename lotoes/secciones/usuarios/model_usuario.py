@@ -14,11 +14,19 @@ class Usuario(db.Model, UserMixin):
     email = db.Column(db.String(256), unique=True, nullable=False)
     password = db.Column(db.String(128), nullable=False)
     is_admin = db.Column(db.Boolean, default=False)
+    rol_id = db.Column(db.Integer, db.ForeignKey('roles.id'))
 
     #def __init__(self, name, email):
     #    self.name = name
     #    self.email = email
-
+    '''
+    @property
+    def password(self):
+        """
+        Prevent password from being accessed
+        """
+        raise AttributeError('password is not a readable attribute.')
+    '''
     def __repr__(self):
         return f'<Usuario {self.email}>'
 
@@ -61,3 +69,25 @@ class Usuario(db.Model, UserMixin):
 @login_manager.user_loader
 def load_user(user_id):
     return Usuario.query.get(int(user_id))
+
+class Rol(db.Model):
+    """
+    Create a Role table
+    """
+
+    __tablename__ = 'roles'
+
+    id = db.Column(db.Integer, primary_key=True)
+    nombre = db.Column(db.String(60), unique=True)
+    descripcion = db.Column(db.String(200))
+    usuarios = db.relationship('Usuario', backref='role', lazy='dynamic')
+
+    def __repr__(self):
+        return '<Rol: {}>'.format(self.nombre)
+    
+    @staticmethod
+    def get_all():
+        return Rol.query.all()
+
+def roles_all():
+    return Rol.get_all()

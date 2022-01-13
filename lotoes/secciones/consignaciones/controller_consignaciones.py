@@ -1,6 +1,6 @@
 from flask import url_for, redirect, Blueprint, render_template, request, current_app
 from .model_consignacion import Consignacion
-from .form_Consignacion import ConsignacionForm
+#from .form_consignacion import ConsignacionForm
 from flask_login import login_required, login_user, logout_user, current_user
 from werkzeug.exceptions import NotFound
 
@@ -11,7 +11,7 @@ consignaciones = Blueprint(BP_NM, __name__, template_folder='templates')
 @consignaciones.route('/')
 @login_required
 def consignaciones_index():
-    Consignaciones = Consignacion.get_all()
+    consignaciones = Consignacion.get_all()
     return render_template('consignaciones.html', consignaciones=consignaciones, seccion="consignaciones")
 
 @consignaciones.route('/new', methods=['GET', 'POST'], defaults={'usuario_id': None})

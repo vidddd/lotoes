@@ -3,9 +3,12 @@ from lotoes import db
 from datetime import datetime
 
 class Consignacion(db.Model):
-    __tablename__ = 'administraciones'
+    __tablename__ = 'consginaciones'
     id = db.Column(db.Integer, primary_key=True)
     fecha = db.Column(db.DateTime())
+    numero = db.Column(db.SmallInteger())
+    fraccion = db.Column(db.SmallInteger())
+    serie = db.Column(db.SmallInteger())
 
     def __repr__(self):
         return f'<Consignacion {self.nombre}>'

@@ -2,8 +2,8 @@
 import os
 from csv import reader
 from lotoes import db, create_app
-from data.initial_data import usuarios, roles, provincias, administraciones, sorteosLnac
-from lotoes.secciones.usuarios.model_usuario import Usuario, Rol
+from data.initial_data import usuarios, provincias, sorteosLnac, administraciones
+from lotoes.secciones.usuarios.model_usuario import Usuario
 from lotoes.secciones.clientes.model_cliente import Provincia, Cliente
 from lotoes.secciones.sorteosLnac.model_sorteoLnac import SorteoLnac
 from lotoes.secciones.administraciones.model_administracion import Administracion
@@ -20,13 +20,8 @@ db.drop_all()
 db.create_all()
 
 obj_list = []
-
 for usuario in usuarios:
     data_obj= Usuario(**usuario)
-    obj_list.append(data_obj)
-
-for rol in roles:
-    data_obj= Rol(**rol)
     obj_list.append(data_obj)
 
 for provincia in provincias:
@@ -64,7 +59,6 @@ with open('data/Clientes.csv', 'r') as read_obj:
                           #notas=row[16] 
                         ) 
             obj_list.append(cliente)
-
 
 db.session.add_all(obj_list)
 db.session.commit()

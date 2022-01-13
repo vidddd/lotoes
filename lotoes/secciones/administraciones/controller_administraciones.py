@@ -67,7 +67,7 @@ def administracion_edit(administracion_id=None):
         administracion.notas=form.notas.data
         administracion.save()
         return redirect(url_for('administraciones.administraciones_index'))
-    
+
     form.nombre.data=administracion.nombre, 
     form.contacto.data=administracion.contacto, 
     form.codigoSelae.data=administracion.codigoSelae, 
@@ -78,7 +78,7 @@ def administracion_edit(administracion_id=None):
     form.direccion.data=administracion.direccion,
     form.municipio.data=administracion.municipio,
     form.cp.data=administracion.cp,
-    #form.provincias.data.id=administracion.provincia_id,
+    form.provincias.data=administracion.provincia_id,
     form.notas.data=administracion.notas
     
-    return render_template('form_administracion.html', form=form, seccion='administraciones')
+    return render_template('form_administracion.html', form=form, administracion_id=administracion.id, seccion='administraciones')

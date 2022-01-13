@@ -31,6 +31,7 @@ body {
   background-color: #f4f6f9;
   text-align: left;
   line-height: 1.5;
+  font-family: 'Ubuntu', 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 * {
   -webkit-box-sizing: border-box;
@@ -446,4 +447,7 @@ pre {
 .alert {
   width: 100%;
   font-size: 13px;
+}
+.error-form {
+  color: #cc0022;
 }

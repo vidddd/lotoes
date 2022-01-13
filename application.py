@@ -2,7 +2,7 @@
 Module Docstring
 """
 
-__author__ = "David Alvarez Calvo david@hipertintorero.com"
+__author__ = "David Alvarez Calvo david@devidd.com"
 __version__ = "0.1.0"
 __license__ = "MIT"
 

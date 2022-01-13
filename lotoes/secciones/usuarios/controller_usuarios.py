@@ -1,7 +1,7 @@
 
 from flask import url_for, redirect, Blueprint, render_template, request, current_app
 from .model_usuario import Usuario
-from .forms import UsuarioForm, LoginForm
+from .form_usuario import UsuarioForm, LoginForm
 from werkzeug.urls import url_parse
 from flask_login import login_required, login_user, logout_user, current_user
 from werkzeug.exceptions import NotFound
@@ -44,8 +44,9 @@ def logout():
 @login_required
 def usuarios_form(usuario_id=None):
     form = UsuarioForm()
+    print(form)
     if form.validate_on_submit():
-        usuario = Usuario(name=form.name.data, email=form.email.data, password=form.password.data, is_admin=form.is_admin.data)
+        usuario = Usuario(name=form.name.data, email=form.email.data, password=form.password.data, is_admin=form.is_admin.data, rol_id=form.roles.data.id)
         usuario.save()
         return redirect(url_for('usuarios.usuarios_index'))
     return render_template('form_usuario.html', form=form, seccion='usuarios')
@@ -57,6 +58,7 @@ def usuario_edit(usuario_id=None):
     if usuario is None:
         raise NotFound(usuario_id)
     form = UsuarioForm()
+
     if form.validate_on_submit():
         usuario.name = form.name.data
         usuario.password = form.password.data
@@ -68,7 +70,8 @@ def usuario_edit(usuario_id=None):
     form.name.data = usuario.name
     form.password.data = usuario.password
     form.email.data = usuario.email
-    form.is_admin = form.is_admin
+    form.is_admin = usuario.is_admin
+    form.roles = usuario.roles
     
     return render_template('form_usuario.html', form=form, seccion='usuarios')
 
